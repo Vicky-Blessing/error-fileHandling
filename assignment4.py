@@ -1,25 +1,26 @@
-try:
-    
-    input_filename = input("Enter the input filename: ")
-    output_filename = input("Enter the output filename: ")
-    
-    
-    with open(input_filename, "r") as input_file:
-        data = input_file.read()
-        print("Original content:")
-        print(data)
-        
-        modified_data = data.upper() + "\nModified: Python is awesome!"
-        
-    
-    with open(output_filename, "w") as output_file:
-        output_file.write(modified_data)
-        print(f"\nModified content written to {output_filename}")
-        print(modified_data)
-        
-except FileNotFoundError:
-    print(f"Error: The file '{input_filename}' was not found.")
-except PermissionError:
-    print(f"Error: Permission denied when accessing '{input_filename}'.")
-except Exception as e:
-    print(f"An unexpected error occurred: {str(e)}")
+def modify_file_content(content):
+    # Example modification: convert text to uppercase
+    return content.upper()
+
+def main():
+    filename = input("Enter the filename to read from: ")
+
+    try:
+        with open(filename, 'r') as file:
+            content = file.read()
+
+        modified_content = modify_file_content(content)
+
+        new_filename = "modified_" + filename
+        with open(new_filename, 'w') as new_file:
+            new_file.write(modified_content)
+
+        print(f"Modified content written to '{new_filename}'")
+
+    except FileNotFoundError:
+        print("Error: File not found.")
+    except IOError:
+        print("Error: File could not be read or written.")
+
+if __name__ == "_main_":
+    main()
